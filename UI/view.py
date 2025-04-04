@@ -25,7 +25,7 @@ class View(ft.UserControl):
         self._title = ft.Text("Analizza Vendite", color="blue", size=28)
         self._tendinaAnno = ft.Dropdown(label="Anno", width=200)
         self._tendinaBrand = ft.Dropdown(label="Brand", width=200)
-        self._tendinaRetailer = ft.Dropdown(label="Retailer", width=400)
+        self._tendinaRetailer = ft.Dropdown(label="Retailer", width=500)
         self._tendinaAnno.options.append(ft.dropdown.Option("Nessun filtro"))
         self._tendinaBrand.options.append(ft.dropdown.Option("Nessun filtro"))
         self._tendinaRetailer.options.append(ft.dropdown.Option("Nessun filtro"))
