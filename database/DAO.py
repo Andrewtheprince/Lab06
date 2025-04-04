@@ -1,6 +1,7 @@
 from database.DB_connect import DBConnect
 
 
-class DAO():
+class DAO:
     def __init__(self):
         pass
+
