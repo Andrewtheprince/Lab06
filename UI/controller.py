@@ -26,7 +26,14 @@ class Controller:
         self._retailer = e.control.data
 
     def handleTopVendite(self, e):
-        pass
+        self._view.lvTxtOut.controls.clear()
+        anno = self._view._tendinaAnno.value
+        brand = self._view._tendinaBrand.value
+        retailer = self._view._tendinaRetailer.value
+        topVendite = self._model.getTopVendite(anno, brand, retailer)
+        for vendita in topVendite:
+            self._view.lvTxtOut.controls.append(ft.Text(vendita))
+        self._view._page.update()
 
     def handleAnalizzaVendite(self, e):
         pass

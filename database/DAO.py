@@ -48,3 +48,18 @@ class DAO:
         cursor.close()
         cnx.close()
         return retailers
+
+    def getTopVendite(self):
+        cnx = DBConnect.get_connection()
+        topVendite = []
+        cursor = cnx.cursor(dictionary=True)
+        query = """ SELECT YEAR(s.Date), s.Unit_sale_price, s.Quantity, s.Retailer_code, s.Product_number, p.Product_brand
+                    FROM go_daily_sales s, go_products p
+                    WHERE s.Product_number = p.Product_number"""
+        cursor.execute(query)
+        for row in cursor:
+            topVendite.append(row)
+        cursor.close()
+        cnx.close()
+        return topVendite
+

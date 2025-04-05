@@ -5,6 +5,7 @@ from flet_core import MainAxisAlignment
 class View(ft.UserControl):
     def __init__(self, page: ft.Page):
         super().__init__()
+        self.lvTxtOut = None
         self._btnAnalizzaVendite = None
         self._btnTopVendite = None
         self._tendinaRetailer = None
@@ -36,7 +37,8 @@ class View(ft.UserControl):
         self._btnTopVendite = ft.ElevatedButton(text="Top Vendite", width=200, on_click=self._controller.handleTopVendite)
         self._btnAnalizzaVendite = ft.ElevatedButton(text="Analizza Vendite", width=200, on_click=self._controller.handleAnalizzaVendite)
         row2 = ft.Row([self._btnTopVendite, self._btnAnalizzaVendite], alignment=MainAxisAlignment.CENTER, spacing=10)
-        self._page.add(self._title, row1, row2)
+        self.lvTxtOut = ft.ListView(expand=True)
+        self._page.add(self._title, row1, row2, self.lvTxtOut)
         self._page.update()
 
     @property
