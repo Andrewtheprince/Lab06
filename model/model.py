@@ -1,3 +1,5 @@
+from operator import itemgetter
+
 import database.DAO as db
 
 class Model:
@@ -18,20 +20,20 @@ class Model:
         venditeAggiornate = []
         for vendita in topVendite:
             if brand is not None:
-                if vendita["Product_brand"] == brand:
-                    pass
-                else:
+                if str(vendita["Product_brand"]) != str(brand):
                     continue
             if retailer is not None:
-                if vendita["Retailer_code"] == retailer:
-                    pass
-                else:
+                if str(vendita["Retailer_code"]) != str(retailer):
                     continue
             if anno is not None:
-                if vendita["YEAR(s.Date)"] == anno:
-                    pass
-                else:
+                pezzi = str(vendita["Date"]).split("-")
+                anno2 = pezzi[0]
+                if anno2 != str(anno):
                     continue
-            venditeAggiornate.append(f"Data:{vendita["YEAR(s.Date)"]}; Ricavo:{float(vendita["Unit_sale_price"])*float(vendita["Quantity"])}; Retailer: {vendita["Retailer_code"]}; Product: {vendita["Product_number"]}")
-        print(venditeAggiornate)
-        return venditeAggiornate
+            venditeAggiornate.append(vendita)
+        venditeAggiornate.sort(key=itemgetter('Ricavo'), reverse=True)
+        venditeOrdinate = venditeAggiornate[:5]
+        venditeDefinitive = []
+        for venditaOrdinata in venditeOrdinate:
+            venditeDefinitive.append(f"Data: {venditaOrdinata["Date"]}; Ricavo: {venditaOrdinata["Ricavo"]}; Retailer: {venditaOrdinata["Retailer_code"]}; Product: {venditaOrdinata["Product_number"]}")
+        return venditeDefinitive

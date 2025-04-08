@@ -53,12 +53,13 @@ class DAO:
         cnx = DBConnect.get_connection()
         topVendite = []
         cursor = cnx.cursor(dictionary=True)
-        query = """ SELECT YEAR(s.Date), s.Unit_sale_price, s.Quantity, s.Retailer_code, s.Product_number, p.Product_brand
+        query = """ SELECT s.Date, s.Unit_sale_price, s.Quantity, s.Retailer_code, s.Product_number, p.Product_brand
                     FROM go_daily_sales s, go_products p
                     WHERE s.Product_number = p.Product_number"""
         cursor.execute(query)
         for row in cursor:
-            topVendite.append(row)
+            vendita = {"Date" : row["Date"], "Retailer_code" : row["Retailer_code"], "Product_number" : row["Product_number"], "Ricavo" : float(row["Unit_sale_price"])*float(row["Quantity"]), "Product_brand" : row["Product_brand"]}
+            topVendite.append(vendita)
         cursor.close()
         cnx.close()
         return topVendite

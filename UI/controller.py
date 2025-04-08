@@ -28,8 +28,14 @@ class Controller:
     def handleTopVendite(self, e):
         self._view.lvTxtOut.controls.clear()
         anno = self._view._tendinaAnno.value
+        if anno =="Nessun filtro":
+            anno = None
         brand = self._view._tendinaBrand.value
+        if brand == "Nessun filtro":
+            brand = None
         retailer = self._view._tendinaRetailer.value
+        if retailer == "Nessun filtro":
+            retailer = None
         topVendite = self._model.getTopVendite(anno, brand, retailer)
         for vendita in topVendite:
             self._view.lvTxtOut.controls.append(ft.Text(vendita))
