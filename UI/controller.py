@@ -42,5 +42,19 @@ class Controller:
         self._view._page.update()
 
     def handleAnalizzaVendite(self, e):
-        pass
+        self._view.lvTxtOut.controls.clear()
+        anno = self._view._tendinaAnno.value
+        if anno == "Nessun filtro":
+            anno = None
+        brand = self._view._tendinaBrand.value
+        if brand == "Nessun filtro":
+            brand = None
+        retailer = self._view._tendinaRetailer.value
+        if retailer == "Nessun filtro":
+            retailer = None
+        infoVenditeAnalizzate = self._model.analizzaVendite(anno, brand, retailer)
+        self._view.lvTxtOut.controls.append(ft.Text("Statistiche vendite:"))
+        for info in infoVenditeAnalizzate:
+            self._view.lvTxtOut.controls.append(ft.Text(info))
+        self._view._page.update()
 

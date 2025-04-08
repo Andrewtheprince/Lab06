@@ -37,3 +37,7 @@ class Model:
         for venditaOrdinata in venditeOrdinate:
             venditeDefinitive.append(f"Data: {venditaOrdinata["Date"]}; Ricavo: {venditaOrdinata["Ricavo"]}; Retailer: {venditaOrdinata["Retailer_code"]}; Product: {venditaOrdinata["Product_number"]}")
         return venditeDefinitive
+
+    def analizzaVendite(self, anno, brand, retailer):
+        #ritorna una lista di stringhe con le info sulle vendite
+        return []
